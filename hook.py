@@ -1,13 +1,15 @@
 import keyboard
 
+# https://github.com/boppreh/keyboard
+# https://github.com/boppreh/keyboard/blob/master/keyboard/_winkeyboard.py
+
 def onRelease(e):
     print("Released: " + e.name)
 
 def onPress(e):
-    if (e.name == 'E'):
-        keyboard.send('b+l+a')
-        print('captured E')
+    print('captured caps lock')
 
+keyboard.on_press_key('caps lock', onPress, suppress=True)
 keyboard.on_press(onPress)
 keyboard.on_release(onRelease)
 
