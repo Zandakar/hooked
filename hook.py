@@ -3,32 +3,41 @@ import keyboard
 
 # https://github.com/boppreh/keyboard
 
-def onPress(e):
+def onPressE():
     keyboard.press('enter')
-    print('onPress ' + e)
+    print('ctrl E')
 
-def onCapsQ(e):
+def onCapsQ():
     keyboard.press('backspace')
-    print('onPress ' + e)
+    print('ctrl Q')
+
+def onCapsW():
+    keyboard.press('up')
+    print('ctrl W')
+
+def onCapsA():
+    keyboard.press('left')
+    print('ctrl A')
+
+def onCapsS():
+    keyboard.press('down')
+    print('ctrl S')
+
+def onCapsD():
+    keyboard.press('right')
+    print('ctrl D')
 
 
-
-
-def onCapsLock(e):
-    print('caps')
-
-# keyboard.on_press_key('caps lock', onPress, suppress=True)        
-# keyboard.on_press(onPress)
 keyboard.block_key('caps lock')
-keyboard.add_hotkey('caps lock + e', onPress, args=['ctrl + e was pressed'], suppress=True, trigger_on_release=True)
-keyboard.add_hotkey('caps lock + q', onCapsQ, args=['ctrl + q was pressed'], suppress=True, trigger_on_release=True)
+keyboard.add_hotkey('caps lock + e', onPressE, suppress=True)
+keyboard.add_hotkey('caps lock + q', onCapsQ, suppress=True)
+keyboard.add_hotkey('caps lock + w', onCapsW, suppress=True)
+keyboard.add_hotkey('caps lock + a', onCapsA, suppress=True)
+keyboard.add_hotkey('caps lock + s', onCapsS, suppress=True)
+keyboard.add_hotkey('caps lock + d', onCapsD, suppress=True)
 while True:
     import time
-    time.sleep(1000)
-
-
-
-
+    time.sleep(500)
 
 
 
