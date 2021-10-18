@@ -1,10 +1,9 @@
-from os import execle
 import keyboard
 
 # https://github.com/boppreh/keyboard
 
 def onPressE():
-    keyboard.press('enter')
+    keyboard.send('enter')
     print('ctrl E')
 
 def onCapsQ():
@@ -37,7 +36,9 @@ keyboard.add_hotkey('caps lock + s', onCapsS, suppress=True)
 keyboard.add_hotkey('caps lock + d', onCapsD, suppress=True)
 while True:
     import time
-    time.sleep(500)
+    time.sleep(1000000)
+
+
 
 
 
