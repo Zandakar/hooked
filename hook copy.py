@@ -1,17 +1,9 @@
 import keyboard
 
 import time
-import PySimpleGUI as sg
 
-# hello_psg.py
-
-
-layout = [[sg.Text("Hello from PySimpleGUI")], [sg.Button("OK")]]
-
-# Create the window
-window = sg.Window("Demo", layout)
-
-
+# https://github.com/boppreh/keyboard
+# python -m PyInstaller --onefile --noconsole \\wsl$\Ubuntu-20.04\root\repos\hooked\hook.py
 
 def onPressE():
     keyboard.send('enter')
@@ -56,17 +48,9 @@ keyboard.add_hotkey('caps lock + s', onCapsS, suppress=True)
 keyboard.add_hotkey('caps lock + d', onCapsD, suppress=True)
 keyboard.add_hotkey('caps lock + c', onCapsC, suppress=True)
 keyboard.add_hotkey('caps lock + v', onCapsV, suppress=True)
-
-
-# Create an event loop
 while True:
-    event, values = window.read()
-    # End program if user closes window or
-    # presses the OK button
-    if event == "OK" or event == sg.WIN_CLOSED:
-        break
+    time.sleep(1000000)
 
-window.close()
 
 
 
