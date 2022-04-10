@@ -1,4 +1,8 @@
 import keyboard
+import mouse
+import time
+from threading import Timer
+
 
 import PySimpleGUI as sg
 
@@ -49,8 +53,25 @@ def suppressInput():
 
 def onShiftCaps():
     keyboard.send('caps lock')
-    # keyboard.block_key('caps lock')
     print('Caps')
+
+hasClickedRecently = False
+
+def setHasClickedTimerFalse():
+    global hasClickedRecently
+    hasClickedRecently = False
+
+
+
+t = Timer(1.0, setHasClickedTimerFalse)
+def onCtrlR():
+    global hasClickedRecently
+    if (hasClickedRecently == False):
+        hasClickedRecently = True
+        mouse.double_click()
+    else:
+        hasClickedRecently = False
+        mouse.click()
 
 
 
@@ -63,9 +84,6 @@ keyboard.add_hotkey('caps lock + s + w', suppressInput, suppress=True)
 keyboard.add_hotkey('caps lock + a + d', suppressInput, suppress=True)
 
 
-
-
-
 keyboard.add_hotkey('shift +caps lock', onShiftCaps, suppress=True)
 keyboard.add_hotkey('caps lock + e', onPressE, suppress=True)
 keyboard.add_hotkey('caps lock + q', onCapsQ, suppress=True)
@@ -75,8 +93,8 @@ keyboard.add_hotkey('caps lock + s', onCapsS, suppress=True)
 keyboard.add_hotkey('caps lock + d', onCapsD, suppress=True)
 keyboard.add_hotkey('caps lock + c', onCapsC, suppress=True)
 keyboard.add_hotkey('caps lock + v', onCapsV, suppress=True)
-# keyboard.block_key('caps lock')
 
+keyboard.add_hotkey('ctrl + r', onCtrlR, suppress=True)
 
 # Create an event loop
 while True:
