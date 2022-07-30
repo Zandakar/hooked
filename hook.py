@@ -1,9 +1,21 @@
 # https://pynput.readthedocs.io/en/latest/keyboard.html
 
+
+#  todo
+# only on caps
+#
+#
+
+
+
+
 from pynput.keyboard import Key, Controller, Listener
 
 keyboard = Controller()
 global listener
+global caps
+
+caps = False
 
 
 keyActionMap =  {
@@ -14,31 +26,42 @@ keyActionMap =  {
 }
 
 def on_press(key):
+    global caps
     try:
         print(key)
-        if keyActionMap.get(key.char):
-            listener._suppress = False
-            keyboard.press(keyActionMap.get(key.char))
-            listener._suppress = True
+
+        if key == Key.caps_lock:    
+            caps = True
+
+        if caps == True:
+            print('if caps true')
+            if keyActionMap.get(key.char):
+                print('if char')
+                listener._suppress = False
+                keyboard.press(keyActionMap.get(key.char))
+                listener._suppress = True
         
+            
 
     except AttributeError as e:
         # print(e)
         if key == Key.esc:
             exit()
 
-# def on_release(key):
-    
-#     print('{0} released'.format(
-#         key))
-#     if key == keyboard.Key.esc:
-#         # Stop listener
-#         return False
+def on_release(key):
+    global caps
+    if key == Key.caps_lock:
+        # print("is caps release"  )
+        caps = False
+    if key == Key.esc:
+        exit()
+
+
 
 # Collect events until released
 with Listener(
         on_press=on_press,
-        # on_release=on_release,
+        on_release=on_release,
         suppress=True) as listener:
     listener.join()
 
