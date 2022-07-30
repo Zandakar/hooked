@@ -3,7 +3,7 @@
 from pynput.keyboard import Key, Controller, Listener
 
 keyboard = Controller()
-# listener = Listener()
+global listener
 
 
 keyActionMap =  {
@@ -17,13 +17,18 @@ def on_press(key):
     try:
         print(key)
         if keyActionMap.get(key.char):
+            listener._suppress = False
             keyboard.press(keyActionMap.get(key.char))
+            listener._suppress = True
+        
 
-    except AttributeError:
+    except AttributeError as e:
+        # print(e)
         if key == Key.esc:
             exit()
 
 # def on_release(key):
+    
 #     print('{0} released'.format(
 #         key))
 #     if key == keyboard.Key.esc:
@@ -33,9 +38,8 @@ def on_press(key):
 # Collect events until released
 with Listener(
         on_press=on_press,
+        # on_release=on_release,
         suppress=True) as listener:
     listener.join()
-
-
 
 
