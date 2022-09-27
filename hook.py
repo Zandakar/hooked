@@ -12,11 +12,17 @@ layout = [[sg.Text("Tom's super cool keyboard hook")], [sg.Button("Close")]]
 # Create the window
 window = sg.Window("Hooked", layout,size=(290, 300))
 
+# python -m PyInstaller --onefile --noconsole \\wsl$\Ubuntu-22.04\root\repos\hooked\hook.py
+
 
 
 def onPressE():
     keyboard.send('enter')
     print('ctrl E')
+
+def onCtrl():
+    keyboard.press('ctrl')
+    print('ctrl')
 
 def onCapsQ():
     keyboard.press('backspace')
@@ -73,6 +79,8 @@ def onCtrlR():
         hasClickedRecently = False
         mouse.click()
 
+# Allow ctrl to open up new windows etc
+keyboard.add_hotkey('ctrl', onCtrl, suppress=False)
 
 
 # list of combinations of keys that should be supressed
@@ -95,6 +103,8 @@ keyboard.add_hotkey('caps lock + c', onCapsC, suppress=True)
 keyboard.add_hotkey('caps lock + v', onCapsV, suppress=True)
 
 keyboard.add_hotkey('ctrl + r', onCtrlR, suppress=True)
+
+
 
 # Create an event loop
 while True:
