@@ -80,7 +80,7 @@ def onCtrlR():
         mouse.click()
 
 # Allow ctrl to open up new windows etc
-keyboard.add_hotkey('ctrl', onCtrl, suppress=False)
+keyboard.add_hotkey('ctrl', onCtrl, suppress=True)
 
 
 # list of combinations of keys that should be supressed
