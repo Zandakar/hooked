@@ -15,14 +15,14 @@ window = sg.Window("Hooked", layout,size=(290, 300))
 # python -m PyInstaller --onefile --noconsole \\wsl$\Ubuntu-22.04\root\repos\hooked\hook.py
 
 
+def onCtrl():
+    keyboard.send('ctrl')
+    print('ctrl')
+
 
 def onPressE():
     keyboard.send('enter')
     print('ctrl E')
-
-def onCtrl():
-    keyboard.press('ctrl')
-    print('ctrl')
 
 def onCapsQ():
     keyboard.press('backspace')
@@ -55,7 +55,7 @@ def onCapsV():
 def suppressInput():
     # Stub to capture caps lock without fully blocking it
     # We can listen to shift caps this way
-    print('Caps')
+    print('suppress')
 
 def onShiftCaps():
     keyboard.send('caps lock')
@@ -80,7 +80,7 @@ def onCtrlR():
         mouse.click()
 
 # Allow ctrl to open up new windows etc
-keyboard.add_hotkey('ctrl', onCtrl, suppress=True)
+# keyboard.add_hotkey('ctrl', suppressInput, suppress=False)
 
 
 # list of combinations of keys that should be supressed
@@ -102,7 +102,7 @@ keyboard.add_hotkey('caps lock + d', onCapsD, suppress=True)
 keyboard.add_hotkey('caps lock + c', onCapsC, suppress=True)
 keyboard.add_hotkey('caps lock + v', onCapsV, suppress=True)
 
-keyboard.add_hotkey('ctrl + r', onCtrlR, suppress=True)
+# keyboard.add_hotkey('ctrl + r', onCtrlR, suppress=True)
 
 
 
